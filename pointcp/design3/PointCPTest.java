@@ -33,6 +33,7 @@ public class PointCPTest
    */
   public static void main(String[] args)
   {
+    long start = System.currentTimeMillis();
     PointCP point;
 
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
@@ -68,6 +69,9 @@ public class PointCPTest
     System.out.println("\nAfter asking to store as Cartesian:\n" + point);
     point.convertStorageToPolar();
     System.out.println("\nAfter asking to store as Polar:\n" + point);
+
+    long finish = System.currentTimeMillis();
+    System.out.println("It took " + (finish - start) + "ms to run");
   }
 
   /**
