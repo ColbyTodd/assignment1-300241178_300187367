@@ -33,7 +33,6 @@ public class PointCPTest
    */
   public static void main(String[] args)
   {
-    long start = System.currentTimeMillis();
     PointCP point;
 
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
@@ -43,9 +42,9 @@ public class PointCPTest
     // If he did not, prompt the user for them.
     try
     {
-      point = new PointCP(args[0].toUpperCase().charAt(0), 
-        Double.valueOf(args[1]).doubleValue(), 
-        Double.valueOf(args[2]).doubleValue());
+      point = new PointCP('P', 
+        Double.valueOf(args[0]).doubleValue(), 
+        Double.valueOf(args[1]).doubleValue());
     }
     catch(Exception e)
     {
@@ -64,11 +63,11 @@ public class PointCPTest
         return;
       }
     }
+    long start = System.currentTimeMillis();
+
     System.out.println("\nYou entered:\n" + point);
-    point.convertStorageToCartesian();
-    System.out.println("\nAfter asking to store as Cartesian:\n" + point);
-    point.convertStorageToPolar();
-    System.out.println("\nAfter asking to store as Polar:\n" + point);
+    System.out.println("\nCartesian value:\n" + "Cartesian  (" + point.getX() + "," + point.getY() + ")");
+    System.out.println("\nPolar value:\n" + point);
 
     long finish = System.currentTimeMillis();
     System.out.println("It took " + (finish - start) + "ms to run");
@@ -91,12 +90,12 @@ public class PointCPTest
     String theInput = "";  // Input information
     
     //Information to be passed to the constructor
-    char coordType = 'A'; // Temporary default, to be set to P or C
+    char coordType = 'P'; // Temporary default, to be set to P or C
     double a = 0.0;
     double b = 0.0;
 
     // Allow the user to enter the three different arguments
-    for (int i = 0; i < 3; i++)
+    for (int i = 1; i < 3; i++)
     {
       while (!(isOK))
       {
