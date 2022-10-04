@@ -42,9 +42,17 @@ public class PointCPTest
     // If he did not, prompt the user for them.
     try
     {
-      point = new PointCP(args[0].toUpperCase().charAt(0), 
+      if(args[0].toUpperCase().charAt(0) == 'C'){
+        point = new PointCP3('C', 
         Double.valueOf(args[1]).doubleValue(), 
         Double.valueOf(args[2]).doubleValue());
+      }
+      else{
+        point = new PointCP2('P', 
+        Double.valueOf(args[1]).doubleValue(), 
+        Double.valueOf(args[2]).doubleValue());
+      }
+      
     }
     catch(Exception e)
     {
@@ -66,9 +74,7 @@ public class PointCPTest
     long start = System.currentTimeMillis();
 
     System.out.println("\nYou entered:\n" + point);
-    point.convertStorageToCartesian();
     System.out.println("\nAfter asking to store as Cartesian:\n" + point);
-    point.convertStorageToPolar();
     System.out.println("\nAfter asking to store as Polar:\n" + point);
 
     long finish = System.currentTimeMillis();
@@ -163,6 +169,13 @@ public class PointCPTest
       isOK = false;
     }
     //Return a new PointCP object
-    return (new PointCP(coordType, a, b));
+    PointCP point;
+    if(coordType == 'C'){
+      return (new PointCP3('C', a, b));
+    }
+    else{
+      return (new PointCP2('P', a, b));
+    }
+    
   }
 }

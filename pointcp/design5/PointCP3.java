@@ -12,29 +12,9 @@
  * @author Dr Timothy C. Lethbridge
  * @version July 2000
  */
-public class PointCP3
+public class PointCP3 extends PointCP
 {
-  //Instance variables ************************************************
-
-  /**
-   * Contains C(artesian) or P(olar) to identify the type of
-   * coordinates that are being dealt with.
-   */
-  private char typeCoord;
-  
-  /**
-   * Contains the current value of X or RHO depending on the type
-   * of coordinates.
-   */
-  private double xOrRho;
-  
-  /**
-   * Contains the current value of Y or THETA value depending on the
-   * type of coordinates.
-   */
-  private double yOrTheta;
-	
-  
+ 
   //Constructors ******************************************************
 
   /**
@@ -51,42 +31,6 @@ public class PointCP3
   
   //Instance methods **************************************************
  
- 
-  public double getX()
-  {
-    if(typeCoord == 'C') 
-      return xOrRho;
-    else 
-      return (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
-  }
-  
-  public double getY()
-  {
-    if(typeCoord == 'C') 
-      return yOrTheta;
-    else 
-      return (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
-  }
-  
-  public double getRho()
-  {
-    if(typeCoord == 'P') 
-      return xOrRho;
-    else 
-      return (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
-  }
-  
-  public double getTheta()
-  {
-    if(typeCoord == 'P')
-      return yOrTheta;
-    else 
-      return Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
-  }
-  
-	
-
-
   /**
    * Calculates the distance in between two points using the Pythagorean
    * theorem  (C ^ 2 = A ^ 2 + B ^ 2). Not needed until E2.30.
@@ -119,7 +63,7 @@ public class PointCP3
     double X = getX();
     double Y = getY();
         
-    return new PointCP('C',
+    return new PointCP3('C',
       (Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
       (Math.sin(radRotation) * X) + (Math.cos(radRotation) * Y));
   }
