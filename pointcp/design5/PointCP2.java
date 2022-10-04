@@ -56,6 +56,6 @@ public class PointCP2 extends PointCP
    */
   public String toString()
   {
-    return ("Polar [" + getRho() + "," + getTheta() + "]" + "\n");
+    return ("Stored as Polar [" + getRho() + "," + getTheta() + "]" + "\n");
   }
 }

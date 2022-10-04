@@ -74,8 +74,8 @@ public class PointCPTest
     long start = System.currentTimeMillis();
 
     System.out.println("\nYou entered:\n" + point);
-    System.out.println("\nAfter asking to store as Cartesian:\n" + point);
-    System.out.println("\nAfter asking to store as Polar:\n" + point);
+    System.out.println("\nCartesian:\n" + "Cartesian  (" + point.getX() + "," + point.getY() + ")");
+    System.out.println("\nPolar:\n" + "Polar [" + point.getRho() + "," + point.getTheta() + "]");
 
     long finish = System.currentTimeMillis();
     System.out.println("It took " + (finish - start) + "ms to run");
