@@ -42,11 +42,10 @@ public class PointCP
    */
   public PointCP(char type, double xOrRho, double yOrTheta)
   {
-    if(type != 'C' && type != 'P')
-      throw new IllegalArgumentException();
+
     this.xOrRho = xOrRho;
     this.yOrTheta = yOrTheta;
-    typeCoord = type;
+    typeCoord = 'C';
   }
 	
   
