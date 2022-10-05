@@ -12,7 +12,7 @@
  * @author Dr Timothy C. Lethbridge
  * @version July 2000
  */
-public class PointCP2 extends PointCP
+public class PointCP2 extends PointCP5
 {	
   
   //Constructors ******************************************************
@@ -38,7 +38,7 @@ public class PointCP2 extends PointCP
    * @param rotation The number of degrees to rotate the point.
    * @return The rotated image of the original point.
    */
-  public PointCP rotatePoint(double rotation)
+  public PointCP5 rotatePoint(double rotation)
   {
     double radRotation = Math.toRadians(rotation);
     double X = getX();

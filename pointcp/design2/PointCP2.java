@@ -12,7 +12,7 @@
  * @author Dr Timothy C. Lethbridge
  * @version July 2000
  */
-public class PointCP
+public class PointCP2
 {
   //Instance variables ************************************************
 
@@ -40,12 +40,11 @@ public class PointCP
   /**
    * Constructs a coordinate object, with a type identifier.
    */
-  public PointCP(char type, double xOrRho, double yOrTheta)
+  public PointCP2(char type, double xOrRho, double yOrTheta)
   {
-
     this.xOrRho = xOrRho;
     this.yOrTheta = yOrTheta;
-    typeCoord = 'C';
+    typeCoord = type;
   }
 	
   
@@ -83,9 +82,6 @@ public class PointCP
     else 
       return Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
   }
-  
-	
-
 
   /**
    * Calculates the distance in between two points using the Pythagorean
@@ -95,7 +91,7 @@ public class PointCP
    * @param pointB The second point.
    * @return The distance between the two points.
    */
-  public double getDistance(PointCP pointB)
+  public double getDistance(PointCP2 pointB)
   {
     // Obtain differences in X and Y, sign is not important as these values
     // will be squared later.
@@ -113,13 +109,13 @@ public class PointCP
    * @param rotation The number of degrees to rotate the point.
    * @return The rotated image of the original point.
    */
-  public PointCP rotatePoint(double rotation)
+  public PointCP2 rotatePoint(double rotation)
   {
     double radRotation = Math.toRadians(rotation);
     double X = getX();
     double Y = getY();
         
-    return new PointCP('C',
+    return new PointCP2('C',
       (Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
       (Math.sin(radRotation) * X) + (Math.cos(radRotation) * Y));
   }
@@ -131,8 +127,6 @@ public class PointCP
    */
   public String toString()
   {
-    return "Stored as " + (typeCoord == 'C' 
-       ? "Cartesian  (" + getX() + "," + getY() + ")"
-       : "Polar [" + getRho() + "," + getTheta() + "]") + "\n";
+    return ("Polar [" + getRho() + "," + getTheta() + "]" + "\n");
   }
 }

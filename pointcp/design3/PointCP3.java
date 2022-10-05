@@ -12,7 +12,7 @@
  * @author Dr Timothy C. Lethbridge
  * @version July 2000
  */
-abstract class PointCP
+public class PointCP3
 {
   //Instance variables ************************************************
 
@@ -20,23 +20,33 @@ abstract class PointCP
    * Contains C(artesian) or P(olar) to identify the type of
    * coordinates that are being dealt with.
    */
-  protected char typeCoord;
+  private char typeCoord;
   
   /**
    * Contains the current value of X or RHO depending on the type
    * of coordinates.
    */
-  protected double xOrRho;
+  private double xOrRho;
   
   /**
    * Contains the current value of Y or THETA value depending on the
    * type of coordinates.
    */
-  protected double yOrTheta;
+  private double yOrTheta;
 	
   
- 
-  
+  //Constructors ******************************************************
+
+  /**
+   * Constructs a coordinate object, with a type identifier.
+   */
+  public PointCP3(char type, double xOrRho, double yOrTheta)
+  {
+
+    this.xOrRho = xOrRho;
+    this.yOrTheta = yOrTheta;
+    typeCoord = 'C';
+  }
 	
   
   //Instance methods **************************************************
@@ -73,6 +83,9 @@ abstract class PointCP
     else 
       return Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
   }
+  
+	
+
 
   /**
    * Calculates the distance in between two points using the Pythagorean
@@ -82,7 +95,7 @@ abstract class PointCP
    * @param pointB The second point.
    * @return The distance between the two points.
    */
-  public double getDistance(PointCP pointB)
+  public double getDistance(PointCP3 pointB)
   {
     // Obtain differences in X and Y, sign is not important as these values
     // will be squared later.
@@ -100,12 +113,26 @@ abstract class PointCP
    * @param rotation The number of degrees to rotate the point.
    * @return The rotated image of the original point.
    */
-  public abstract PointCP rotatePoint(double rotation);
+  public PointCP3 rotatePoint(double rotation)
+  {
+    double radRotation = Math.toRadians(rotation);
+    double X = getX();
+    double Y = getY();
+        
+    return new PointCP3('C',
+      (Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
+      (Math.sin(radRotation) * X) + (Math.cos(radRotation) * Y));
+  }
 
   /**
    * Returns information about the coordinates.
    *
    * @return A String containing information about the coordinates.
    */
-  public abstract String toString();
+  public String toString()
+  {
+    return "Stored as " + (typeCoord == 'C' 
+       ? "Cartesian  (" + getX() + "," + getY() + ")"
+       : "Polar [" + getRho() + "," + getTheta() + "]") + "\n";
+  }
 }

@@ -13,15 +13,15 @@ import java.io.*;
  * @author Paul Holden
  * @version July 2000
  */
-public class PointCPTest
+public class PointCP2Test
 {
   //Class methods *****************************************************
 
   /**
-   * This method is responsible for the creation of the PointCP
+   * This method is responsible for the creation of the PointCP2
    * object.  This can be done in two ways; the first, by using the
    * command line and running the program using <code> java 
-   * PointCPTest &lt;coordtype (c/p)&gt; &lt;X/RHO&gt; &lt;Y/THETA&gt;
+   * PointCP2Test &lt;coordtype (c/p)&gt; &lt;X/RHO&gt; &lt;Y/THETA&gt;
    * </code> and the second by getting the program to prompt the user.
    * If the user does not enter a valid sequence at the command line,
    * the program will prompte him or her.
@@ -33,7 +33,7 @@ public class PointCPTest
    */
   public static void main(String[] args)
   {
-    PointCP point;
+    PointCP2 point;
 
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
 
@@ -42,7 +42,7 @@ public class PointCPTest
     // If he did not, prompt the user for them.
     try
     {
-      point = new PointCP('C', 
+      point = new PointCP2('P', 
         Double.valueOf(args[0]).doubleValue(), 
         Double.valueOf(args[1]).doubleValue());
     }
@@ -64,10 +64,10 @@ public class PointCPTest
       }
     }
     long start = System.currentTimeMillis();
-    
+
     System.out.println("\nYou entered:\n" + point);
-    System.out.println("\nCartesian:\n" + point);
-    System.out.println("\nPolar:\n" + "Polar [" + point.getRho() + "," + point.getTheta() + "]" + "\n");
+    System.out.println("\nCartesian value:\n" + "Cartesian  (" + point.getX() + "," + point.getY() + ")");
+    System.out.println("\nPolar value:\n" + point);
 
     long finish = System.currentTimeMillis();
     System.out.println("It took " + (finish - start) + "ms to run");
@@ -75,22 +75,22 @@ public class PointCPTest
 
   /**
    * This method obtains input from the user and verifies that
-   * it is valid.  When the input is valid, it returns a PointCP
+   * it is valid.  When the input is valid, it returns a PointCP2
    * object.
    *
-   * @return A PointCP constructed using information obtained 
+   * @return A PointCP2 constructed using information obtained 
    *         from the user.
    * @throws IOException If there is an error getting input from
    *         the user.
    */
-  private static PointCP getInput() throws IOException
+  private static PointCP2 getInput() throws IOException
   {
     byte[] buffer = new byte[1024];  //Buffer to hold byte input
     boolean isOK = false;  // Flag set if input correct
     String theInput = "";  // Input information
     
     //Information to be passed to the constructor
-    char coordType = 'C'; // Temporary default, to be set to P or C
+    char coordType = 'P'; // Temporary default, to be set to P or C
     double a = 0.0;
     double b = 0.0;
 
@@ -160,7 +160,7 @@ public class PointCPTest
       //Reset flag so while loop will prompt for other arguments
       isOK = false;
     }
-    //Return a new PointCP object
-    return (new PointCP(coordType, a, b));
+    //Return a new PointCP2 object
+    return (new PointCP2(coordType, a, b));
   }
 }

@@ -12,7 +12,7 @@
  * @author Dr Timothy C. Lethbridge
  * @version July 2000
  */
-public class PointCP
+abstract class PointCP5
 {
   //Instance variables ************************************************
 
@@ -20,32 +20,23 @@ public class PointCP
    * Contains C(artesian) or P(olar) to identify the type of
    * coordinates that are being dealt with.
    */
-  private char typeCoord;
+  protected char typeCoord;
   
   /**
    * Contains the current value of X or RHO depending on the type
    * of coordinates.
    */
-  private double xOrRho;
+  protected double xOrRho;
   
   /**
    * Contains the current value of Y or THETA value depending on the
    * type of coordinates.
    */
-  private double yOrTheta;
+  protected double yOrTheta;
 	
   
-  //Constructors ******************************************************
-
-  /**
-   * Constructs a coordinate object, with a type identifier.
-   */
-  public PointCP(char type, double xOrRho, double yOrTheta)
-  {
-    this.xOrRho = xOrRho;
-    this.yOrTheta = yOrTheta;
-    typeCoord = type;
-  }
+ 
+  
 	
   
   //Instance methods **************************************************
@@ -91,7 +82,7 @@ public class PointCP
    * @param pointB The second point.
    * @return The distance between the two points.
    */
-  public double getDistance(PointCP pointB)
+  public double getDistance(PointCP5 pointB)
   {
     // Obtain differences in X and Y, sign is not important as these values
     // will be squared later.
@@ -109,24 +100,12 @@ public class PointCP
    * @param rotation The number of degrees to rotate the point.
    * @return The rotated image of the original point.
    */
-  public PointCP rotatePoint(double rotation)
-  {
-    double radRotation = Math.toRadians(rotation);
-    double X = getX();
-    double Y = getY();
-        
-    return new PointCP('C',
-      (Math.cos(radRotation) * X) - (Math.sin(radRotation) * Y),
-      (Math.sin(radRotation) * X) + (Math.cos(radRotation) * Y));
-  }
+  public abstract PointCP5 rotatePoint(double rotation);
 
   /**
    * Returns information about the coordinates.
    *
    * @return A String containing information about the coordinates.
    */
-  public String toString()
-  {
-    return ("Polar [" + getRho() + "," + getTheta() + "]" + "\n");
-  }
+  public abstract String toString();
 }

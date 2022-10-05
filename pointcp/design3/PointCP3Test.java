@@ -13,15 +13,15 @@ import java.io.*;
  * @author Paul Holden
  * @version July 2000
  */
-public class PointCPTest
+public class PointCP3Test
 {
   //Class methods *****************************************************
 
   /**
-   * This method is responsible for the creation of the PointCP
+   * This method is responsible for the creation of the PointCP3
    * object.  This can be done in two ways; the first, by using the
    * command line and running the program using <code> java 
-   * PointCPTest &lt;coordtype (c/p)&gt; &lt;X/RHO&gt; &lt;Y/THETA&gt;
+   * PointCP3Test &lt;coordtype (c/p)&gt; &lt;X/RHO&gt; &lt;Y/THETA&gt;
    * </code> and the second by getting the program to prompt the user.
    * If the user does not enter a valid sequence at the command line,
    * the program will prompte him or her.
@@ -33,26 +33,18 @@ public class PointCPTest
    */
   public static void main(String[] args)
   {
-    PointCP point;
+    PointCP3 point;
 
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
 
     // Check if the user input coordinates from the command line
-    // If he did, create the PointCP object from these arguments.
+    // If he did, create the PointCP3 object from these arguments.
     // If he did not, prompt the user for them.
     try
     {
-      if(args[0].toUpperCase().charAt(0) == 'C'){
-        point = new PointCP3('C', 
-        Double.valueOf(args[1]).doubleValue(), 
-        Double.valueOf(args[2]).doubleValue());
-      }
-      else{
-        point = new PointCP2('P', 
-        Double.valueOf(args[1]).doubleValue(), 
-        Double.valueOf(args[2]).doubleValue());
-      }
-      
+      point = new PointCP3('C', 
+        Double.valueOf(args[0]).doubleValue(), 
+        Double.valueOf(args[1]).doubleValue());
     }
     catch(Exception e)
     {
@@ -72,10 +64,10 @@ public class PointCPTest
       }
     }
     long start = System.currentTimeMillis();
-
+    
     System.out.println("\nYou entered:\n" + point);
-    System.out.println("\nCartesian:\n" + "Cartesian  (" + point.getX() + "," + point.getY() + ")");
-    System.out.println("\nPolar:\n" + "Polar [" + point.getRho() + "," + point.getTheta() + "]");
+    System.out.println("\nCartesian:\n" + point);
+    System.out.println("\nPolar:\n" + "Polar [" + point.getRho() + "," + point.getTheta() + "]" + "\n");
 
     long finish = System.currentTimeMillis();
     System.out.println("It took " + (finish - start) + "ms to run");
@@ -83,27 +75,27 @@ public class PointCPTest
 
   /**
    * This method obtains input from the user and verifies that
-   * it is valid.  When the input is valid, it returns a PointCP
+   * it is valid.  When the input is valid, it returns a PointCP3
    * object.
    *
-   * @return A PointCP constructed using information obtained 
+   * @return A PointCP3 constructed using information obtained 
    *         from the user.
    * @throws IOException If there is an error getting input from
    *         the user.
    */
-  private static PointCP getInput() throws IOException
+  private static PointCP3 getInput() throws IOException
   {
     byte[] buffer = new byte[1024];  //Buffer to hold byte input
     boolean isOK = false;  // Flag set if input correct
     String theInput = "";  // Input information
     
     //Information to be passed to the constructor
-    char coordType = 'A'; // Temporary default, to be set to P or C
+    char coordType = 'C'; // Temporary default, to be set to P or C
     double a = 0.0;
     double b = 0.0;
 
     // Allow the user to enter the three different arguments
-    for (int i = 0; i < 3; i++)
+    for (int i = 1; i < 3; i++)
     {
       while (!(isOK))
       {
@@ -168,14 +160,7 @@ public class PointCPTest
       //Reset flag so while loop will prompt for other arguments
       isOK = false;
     }
-    //Return a new PointCP object
-    PointCP point;
-    if(coordType == 'C'){
-      return (new PointCP3('C', a, b));
-    }
-    else{
-      return (new PointCP2('P', a, b));
-    }
-    
+    //Return a new PointCP3 object
+    return (new PointCP3(coordType, a, b));
   }
 }
