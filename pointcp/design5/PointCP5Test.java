@@ -3,6 +3,7 @@
 // license found at http://www.site.uottawa.ca/school/research/lloseng/
 
 import java.io.*;
+import java.util.Random;
 
 /**
  * This class prompts the user for a set of coordinates, and then 
@@ -34,51 +35,68 @@ public class PointCP5Test
   public static void main(String[] args)
   {
     PointCP5 point;
+    Random r = new Random();
+        
+    long start, finish, minTime, maxTime, totalTime;
+    double rotate, x, y;
+    minTime = 1000;
+    maxTime = 0;
+    totalTime = 0;
+    for(int i = 0; i < 1000; i++){
+      start = System.currentTimeMillis();
 
-    System.out.println("Cartesian-Polar Coordinates Conversion Program");
+      x = 1000 * r.nextDouble();
+      y = 1000 * r.nextDouble();
+      rotate = 360 * r.nextDouble();
+      point = new PointCP2('P', x, y);
 
-    // Check if the user input coordinates from the command line
-    // If he did, create the PointCP5 object from these arguments.
-    // If he did not, prompt the user for them.
-    try
-    {
-      if(args[0].toUpperCase().charAt(0) == 'C'){
-        point = new PointCP3('C', 
-        Double.valueOf(args[1]).doubleValue(), 
-        Double.valueOf(args[2]).doubleValue());
-      }
-      else{
-        point = new PointCP2('P', 
-        Double.valueOf(args[1]).doubleValue(), 
-        Double.valueOf(args[2]).doubleValue());
-      }
-      
-    }
-    catch(Exception e)
-    {
-      // If we arrive here, it is because either there were no
-      // command line arguments, or they were invalid
-      if(args.length != 0)
-        System.out.println("Invalid arguments on command line");
+      point.rotatePoint(rotate);
 
-      try
-      {
-        point = getInput();
+      finish = System.currentTimeMillis();
+
+      totalTime = totalTime + finish - start;
+      if((finish - start) < minTime){
+        minTime = finish - start;
       }
-      catch(IOException ex)
-      {
-        System.out.println("Error getting input. Ending program.");
-        return;
+
+      if((finish - start) > maxTime){
+        maxTime = finish - start;
       }
     }
-    long start = System.currentTimeMillis();
+    System.out.println("Rotate test");
+    System.out.println("Max time = " + maxTime);
+    System.out.println("Min time = " + minTime);
+    System.out.println("Total time = " + totalTime);
 
-    System.out.println("\nYou entered:\n" + point);
-    System.out.println("\nCartesian:\n" + "Cartesian  (" + point.getX() + "," + point.getY() + ")");
-    System.out.println("\nPolar:\n" + "Polar [" + point.getRho() + "," + point.getTheta() + "]");
+    minTime = 1000;
+    maxTime = 0;
+    totalTime = 0;
+    for(int i = 0; i < 1000; i++){
+      start = System.currentTimeMillis();
 
-    long finish = System.currentTimeMillis();
-    System.out.println("It took " + (finish - start) + "ms to run");
+      x = 1000 * r.nextDouble();
+      y = 1000 * r.nextDouble();
+      rotate = 360 * r.nextDouble();
+      point = new PointCP2('P', x, y);
+      PointCP5 pointB = new PointCP2('C', 1000*r.nextDouble(), 1000*r.nextDouble());
+
+      point.getDistance(pointB);
+
+      finish = System.currentTimeMillis();
+
+      totalTime = totalTime + finish - start;
+      if((finish - start) < minTime){
+        minTime = finish - start;
+      }
+
+      if((finish - start) > maxTime){
+        maxTime = finish - start;
+      }
+    }
+    System.out.println("Distance test");
+    System.out.println("Max time = " + maxTime);
+    System.out.println("Min time = " + minTime);
+    System.out.println("Total time = " + totalTime);
   }
 
   /**
